@@ -1,0 +1,30 @@
+{
+    "model_path" : "/works/ai2/model_col/VRAE",
+    "model_params":{
+        "hidden_size":128,
+        "latent_length":30,
+        "output_depth":1,
+        "time_size":256,
+        "dropout":0.3,
+        "recurrent_dropout":0.3
+    },
+    "train_params" : {
+        "time_size" : 256,
+        "over_len" : 128,
+        "beta_cycle" : 200,
+        "batch_size" : 512,
+        "beta_rate" : 0.01,
+        "epochs" : 3,
+        "learning_rate" : 0.00001,
+        "summary_dir" : "/works/ai2/logs",
+        "add_name" : "_VRAE_Train_Loop_TEST_Model",
+        "cp_dir" : "/works/ai2/save"
+    
+    },
+    "data_params" : {
+        "from" : "mit_database",
+        "batch_size" : 512,
+        "time_size" : 256,
+        "over_len" : 128
+    }
+}

@@ -1,0 +1,2 @@
+Yun H*, Lee M*, Kang YS, Seok J, “Portfolio Management via Two-stage Deep Learning with A Joint Cost”, Expert Systems with Applications. 2020.
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Bluetooth Connecter-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="BluetoothConnecter" customModule="motionClass" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOi-RK-rUi">
+                                <rect key="frame" x="114" y="398" width="154" height="49"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <state key="normal" title="CONNECT"/>
+                                <connections>
+                                    <action selector="connectingBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jc1-b9-azP"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Device number" minimumFontSize="17" background="ioioiopios" translatesAutoresizingMaskIntoConstraints="NO" id="csw-8a-xxm">
+                                <rect key="frame" x="45" y="327.66666666666669" width="300" height="50"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="6FQ-SZ-bPU"/>
+                                    <constraint firstAttribute="height" constant="50" id="qvO-UW-g95"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="24"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="csw-8a-xxm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TAZ-Ee-vfB"/>
+                            <constraint firstItem="mOi-RK-rUi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jvr-Fs-mrz"/>
+                            <constraint firstItem="mOi-RK-rUi" firstAttribute="top" secondItem="csw-8a-xxm" secondAttribute="bottom" constant="20" id="l2d-3C-82x"/>
+                            <constraint firstItem="mOi-RK-rUi" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="two-Nd-RAh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deviceNumber" destination="csw-8a-xxm" id="BFr-GU-FFx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="44.615384615384613" y="88.862559241706151"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ioioiopios" width="128" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

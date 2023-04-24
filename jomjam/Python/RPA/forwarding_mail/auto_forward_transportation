@@ -1,0 +1,87 @@
+import pickle
+import datetime
+from utils import forwarding
+import os
+
+
+def loading_log_data():
+    with open('C:\\auto_forward_transportation\\log_data.pickle', 'rb') as f:
+        log_data_load = pickle.load(f)
+    return log_data_load
+
+
+def func_start():
+
+    # From Log Data
+    log_data_load = loading_log_data()
+
+    terms_default = log_data_load["term"]
+
+    last_end_year = log_data_load["last_end_time"][0]
+    last_end_month = log_data_load["last_end_time"][1]
+    last_end_day = log_data_load["last_end_time"][2]
+    last_end_hour = log_data_load["last_end_time"][3]
+    last_end_minute = log_data_load["last_end_time"][4]
+    last_end_second = log_data_load["last_end_time"][5]
+    last_end_datetime = datetime.datetime(last_end_year, last_end_month, last_end_day, last_end_hour,
+                                          last_end_minute, last_end_second)
+
+    done_list = log_data_load["done_list"]
+
+    # Now Datetime
+    now_datetime = datetime.datetime.now() + datetime.timedelta(minutes=1)
+
+    now_year = now_datetime.year
+    now_month = now_datetime.month
+    now_day = now_datetime.day
+    now_hour = now_datetime.hour
+    now_minute = now_datetime.minute
+    now_second = now_datetime.second
+    now_datetime = datetime.datetime(now_year, now_month, now_day, now_hour, now_minute, now_second)
+
+    # Send to
+    send_to = log_data_load["send_to"]
+
+    # Mail From
+    mail_from = log_data_load["mail_from"]
+
+    forwarding_ob = forwarding.Forwarding(last_end_datetime=last_end_datetime, now_datetime=now_datetime,
+                                          mail_from=mail_from, send_to=send_to, done_list=done_list)
+    forwarding_ob.func_start()
+    success_num, success_list, error_list, error_with_subject = forwarding_ob.return_result()
+
+    new_now_datetime = now_datetime - datetime.timedelta(minutes=2)
+    new_log_data = {
+        'term': int(terms_default),
+        'last_end_time': [new_now_datetime.year, new_now_datetime.month, new_now_datetime.day,
+                          new_now_datetime.hour, new_now_datetime.minute, new_now_datetime.second],
+        'mail_from': mail_from,
+        'send_to': send_to,
+        'done_list': success_list
+    }
+    with open('C:\\auto_forward_transportation\\log_data.pickle', 'wb') as f:
+        pickle.dump(new_log_data, f, pickle.HIGHEST_PROTOCOL)
+
+    if len(error_with_subject) >= 1:
+        error_type_name = ["상차지 에러", "상차날짜 에러", "상차시간 에러", "상차담당자 에러", "상차담당자연락처 에러",
+                           "하차지 에러", "하차날짜 에러", "하차시간 에러", "하차담당자 에러", "하차담당자연락처 에러",
+                           "상차경유날짜 에러", "상차경유시간 에러", "상차경유담당자 에러", "상차경유담당자연락처 에러",
+                           "하차경유날짜 에러", "하차경유시간 에러", "하차경유담당자 에러", "하차경유담당자연락처 에러"]
+        error_memo = ""
+        for k_ in error_with_subject.keys():
+            error_memo = error_memo + str(k_) + "\n"
+            for err in error_with_subject[k_]:
+                error_memo = error_memo + str(error_type_name[err]) + " "
+            error_memo += "\n"
+
+        desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
+        if os.path.isfile(desktop_path+"\\forwarding_error_memo.txt"):
+            with open(desktop_path+"\\forwarding_error_memo.txt", "a") as f:
+                f.write(error_memo)
+        else:
+            with open(desktop_path+"\\forwarding_error_memo.txt", "w") as f:
+                f.write(error_memo)
+
+
+if __name__ == '__main__':
+    func_start()
